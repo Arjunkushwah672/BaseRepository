@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 namespace WebApplication1.Repository
 {
 
-    public class BaseRepository<T> where T : class
+    public class BaseRepository<MstRegistration> where MstRegistration : class
     {
         private readonly LearnDbContext _context;
 
@@ -13,23 +13,23 @@ namespace WebApplication1.Repository
             _context = context;
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync()
+        public async Task<IEnumerable<MstRegistration>> GetAllAsync()
         {
-            return await _context.Set<T>().ToListAsync();
+            return await _context.Set<MstRegistration>().ToListAsync();
         }
 
-        public async Task<T?> GetByIdAsync(int id)
+        public async Task<MstRegistration?> GetByIdAsync(int id)
         {
-            return await _context.Set<T>().FindAsync(id);
+            return await _context.Set<MstRegistration>().FindAsync(id);
         }
 
-        public async Task AddAsync(T entity)
+        public async Task AddAsync(MstRegistration entity)
         {
-            await _context.Set<T>().AddAsync(entity);
+            await _context.Set<MstRegistration>().AddAsync(entity);
             await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateAsync(T entity)
+        public async Task UpdateAsync(MstRegistration entity)
         {
             _context.Entry(entity).State = EntityState.Modified;
             await _context.SaveChangesAsync();
@@ -40,7 +40,7 @@ namespace WebApplication1.Repository
             var entity = await GetByIdAsync(id);
             if (entity != null)
             {
-                _context.Set<T>().Remove(entity);
+                _context.Set<MstRegistration>().Remove(entity);
                 await _context.SaveChangesAsync();
             }
         }
